@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- /src/dao.mapper/ItemMapper.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.UserMapper">
+	<select id="getUser" parameterType="map" resultType="User">
+		select * from useraccount
+		<where>
+			<if test="idchks != null">
+				 userid in 
+				 <foreach collection="idchks" open="(" close=")" item="id" separator=",">
+				 	#{id}
+				 </foreach>
+			</if>
+			<if test="userId != null"> userId=#{userId} </if>
+			<if test="password != null">and password=#{password}</if>
+		</where>
+		order by userId
+	</select>
+</mapper>
